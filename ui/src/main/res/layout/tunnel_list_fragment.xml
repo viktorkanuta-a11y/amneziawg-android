@@ -56,8 +56,7 @@
                 android:layout_height="140dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:alpha="0.3333333"
-                android:src="@drawable/ic_icon" />
+                android:src="@drawable/cat_transparent" />
 
             <TextView
                 android:layout_width="wrap_content"
