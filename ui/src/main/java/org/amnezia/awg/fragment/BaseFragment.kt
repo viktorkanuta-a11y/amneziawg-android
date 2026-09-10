@@ -21,6 +21,7 @@ import org.amnezia.awg.activity.BaseActivity.OnSelectedTunnelChangedListener
 import org.amnezia.awg.backend.GoBackend
 import org.amnezia.awg.backend.Tunnel
 import org.amnezia.awg.databinding.TunnelDetailFragmentBinding
+import org.amnezia.awg.databinding.TunnelListFragmentBinding
 import org.amnezia.awg.databinding.TunnelListItemBinding
 import org.amnezia.awg.model.ObservableTunnel
 import org.amnezia.awg.util.ErrorMessages
@@ -62,6 +63,7 @@ abstract class BaseFragment : Fragment(), OnSelectedTunnelChangedListener {
         val tunnel = when (val binding = DataBindingUtil.findBinding<ViewDataBinding>(view)) {
             is TunnelDetailFragmentBinding -> binding.tunnel
             is TunnelListItemBinding -> binding.item
+            is TunnelListFragmentBinding -> binding.tunnels?.singleOrNull()
             else -> return
         } ?: return
         val activity = activity ?: return
