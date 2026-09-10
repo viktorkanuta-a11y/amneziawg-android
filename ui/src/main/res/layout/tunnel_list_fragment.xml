@@ -70,7 +70,34 @@
                 android:text="@string/tunnel_list_placeholder"
                 android:textSize="20sp" />
         </LinearLayout>
+                <LinearLayout
+            android:id="@+id/single_tunnel_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{tunnels.size() == 1 ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/single_tunnel_cat"
+                android:layout_width="260dp"
+                android:layout_height="195dp"
+                android:layout_gravity="center"
+                android:src="@{tunnels[0].state == State.UP ? @drawable/cat_on : @drawable/cat_none}"
+                tools:src="@drawable/cat_none" />
+
+            <org.amnezia.awg.widget.ToggleSwitch
+                android:id="@+id/single_tunnel_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:scaleX="2.2"
+                android:scaleY="2.2"
+                app:checked="@{tunnels[0].state == State.UP}"
+                app:onBeforeCheckedChanged="@{fragment::setTunnelState}" />
+        </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/create_fab"
             android:layout_width="wrap_content"
