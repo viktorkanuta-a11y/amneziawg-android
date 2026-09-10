@@ -6,6 +6,8 @@
     <data>
 
         <import type="org.amnezia.awg.model.ObservableTunnel" />
+        <import type="org.amnezia.awg.backend.Tunnel.State" />
+        <import type="android.view.View" />
 
         <variable
             name="fragment"
