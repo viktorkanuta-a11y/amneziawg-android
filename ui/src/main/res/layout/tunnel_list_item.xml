@@ -39,11 +39,21 @@
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp">
 
+            <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tunnel_cat"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@{item.state == State.UP ? @drawable/cat_on : @drawable/cat_none}"
+            tools:src="@drawable/cat_none" />
+
         <LinearLayout
             android:id="@+id/tunnel_info_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_toEndOf="@id/tunnel_cat"
+            android:layout_marginStart="12dp"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/tunnel_switch"
             android:orientation="vertical">
