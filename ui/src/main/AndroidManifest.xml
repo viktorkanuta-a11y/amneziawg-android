@@ -34,7 +34,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/permission_label"
         android:protectionLevel="dangerous" />
-
+        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+        <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
     <application
         android:name=".Application"
         android:allowBackup="false"
