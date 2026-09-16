@@ -5,8 +5,14 @@
 
 package org.amnezia.awg.backend;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
+import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.system.OsConstants;
@@ -430,6 +436,7 @@ public final class GoBackend implements Backend {
             service.protect(awgGetSocketV6(currentTunnelHandle));
 
             launchStatusJob();
+            service.startForegroundCompat();
         } else {
             if (currentTunnelHandle == -1) {
                 Log.w(TAG, "Tunnel already down");
@@ -442,7 +449,9 @@ public final class GoBackend implements Backend {
             currentConfig = null;
             awgTurnOff(handleToClose);
             try {
-                vpnService.get(0, TimeUnit.NANOSECONDS).stopSelf();
+                final VpnService runningService = vpnService.get(0, TimeUnit.NANOSECONDS);
+                runningService.stopForegroundCompat();
+                runningService.stopSelf();
             } catch (final TimeoutException ignored) { }
         }
 
@@ -532,6 +541,53 @@ public final class GoBackend implements Backend {
 
         public void setOwner(final GoBackend owner) {
             this.owner = owner;
+        }
+
+        private static final int NOTIFICATION_ID = 1;
+        private static final String CHANNEL_ID = "vypein_tunnel";
+
+        // Уведомление без текста: кот в статус-баре и цветной кот в шторке, сервис в передний план (Ш.14.3)
+        void startForegroundCompat() {
+            try {
+                final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                final Notification.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    // "Подключение"
+                    final NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                            "\u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435",
+                            NotificationManager.IMPORTANCE_LOW);
+                    channel.setShowBadge(false);
+                    if (manager != null)
+                        manager.createNotificationChannel(channel);
+                    builder = new Notification.Builder(this, CHANNEL_ID);
+                } else {
+                    builder = new Notification.Builder(this);
+                }
+                final int smallIcon = getResources().getIdentifier("ic_stat_cat", "drawable", getPackageName());
+                final int largeIcon = getResources().getIdentifier("ic_notify_cat", "drawable", getPackageName());
+                builder.setSmallIcon(smallIcon != 0 ? smallIcon : getApplicationInfo().icon)
+                        .setShowWhen(false)
+                        .setOngoing(true);
+                if (largeIcon != 0)
+                    builder.setLargeIcon(Icon.createWithResource(this, largeIcon));
+                final Intent launch = getPackageManager().getLaunchIntentForPackage(getPackageName());
+                if (launch != null)
+                    builder.setContentIntent(PendingIntent.getActivity(this, 0, launch, PendingIntent.FLAG_IMMUTABLE));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+                    startForeground(NOTIFICATION_ID, builder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED);
+                else
+                    startForeground(NOTIFICATION_ID, builder.build());
+            } catch (final Exception e) {
+                Log.e(TAG, "Unable to start foreground", e);
+            }
+        }
+
+        void stopForegroundCompat() {
+            try {
+                stopForeground(STOP_FOREGROUND_REMOVE);
+            } catch (final Exception e) {
+                Log.e(TAG, "Unable to stop foreground", e);
+            }
         }
     }
 }
