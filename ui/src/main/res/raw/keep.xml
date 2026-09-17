@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ВыпейН: картинки кота для уведомления подгружаются по имени, сборка не должна их выкидывать -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_stat_cat,@drawable/ic_notify_cat" />
