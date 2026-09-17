@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val pkg: String = providers.gradleProperty("amneziawgPackageName").get()
+// Подпись ВыпейН: путь к ключу приходит из сценария сборки GitHub, сам ключ и пароль лежат в секретах репозитория
+val vipeinKeystorePath: String? = System.getenv("KEYSTORE_PATH")
 
 plugins {
     alias(libs.plugins.android.application)
@@ -30,8 +32,21 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
         isCoreLibraryDesugaringEnabled = true
     }
+    signingConfigs {
+        if (vipeinKeystorePath != null) {
+            create("vipein") {
+                storeFile = file(vipeinKeystorePath!!)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEYSTORE_PASSWORD")
+            }
+        }
+    }
     buildTypes {
         release {
+            if (vipeinKeystorePath != null) {
+                signingConfig = signingConfigs.getByName("vipein")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles("proguard-android-optimize.txt")
