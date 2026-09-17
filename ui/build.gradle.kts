@@ -17,7 +17,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    namespace = pkg
+    namespace = "org.amnezia.awg"
     defaultConfig {
         applicationId = pkg
         targetSdk = 36
