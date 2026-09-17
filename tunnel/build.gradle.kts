@@ -14,7 +14,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    namespace = "${pkg}.tunnel"
+    namespace = "org.amnezia.awg.tunnel"
     externalNativeBuild {
         cmake {
             path("tools/CMakeLists.txt")
