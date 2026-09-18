@@ -22,6 +22,7 @@ import org.amnezia.awg.R
 import org.amnezia.awg.fragment.TunnelDetailFragment
 import org.amnezia.awg.fragment.TunnelEditorFragment
 import org.amnezia.awg.model.ObservableTunnel
+import org.amnezia.awg.updater.Updater
 
 /**
  * CRUD interface for AmneziaWG tunnels. This activity serves as the main entry point to the
@@ -70,6 +71,9 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
         if (Build.VERSION.SDK_INT >= 33 &&
             checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
             requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+        // Ш.19: проверка обновлений при запуске (не при повороте экрана)
+        if (savedInstanceState == null)
+            Updater.check(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

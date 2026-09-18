@@ -37,6 +37,8 @@
         <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
         <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- ВыпейН, Ш.19: установка скачанного обновления -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application
         android:name=".Application"
         android:allowBackup="false"
@@ -107,6 +109,17 @@
             android:authorities="${applicationId}.exported-log"
             android:exported="false"
             android:grantUriPermissions="true" />
+
+        <!-- ВыпейН, Ш.19: отдаёт скачанное обновление установщику -->
+        <provider
+            android:name=".updater.UpdateFileProvider"
+            android:authorities="${applicationId}.updates"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_paths" />
+        </provider>
 
         <receiver
             android:name=".BootShutdownReceiver"
