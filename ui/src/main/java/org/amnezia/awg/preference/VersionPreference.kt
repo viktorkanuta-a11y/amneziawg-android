@@ -21,7 +21,8 @@ import kotlinx.coroutines.withContext
 class VersionPreference(context: Context, attrs: AttributeSet?) : Preference(context, attrs) {
     private var versionSummary: String? = null
 
-    override fun getSummary() = versionSummary
+    // ВыпейН: подпись «Бэкенд: Go…» не показываем. Вернуть: getSummary() = versionSummary
+    override fun getSummary(): CharSequence? = null
 
     override fun getTitle() = context.getString(R.string.version_title, BuildConfig.VERSION_NAME)
 

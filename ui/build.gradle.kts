@@ -23,8 +23,9 @@ android {
     defaultConfig {
         applicationId = pkg
         targetSdk = 36
-        versionCode = providers.gradleProperty("amneziawgVersionCode").get().toInt()
-        versionName = providers.gradleProperty("amneziawgVersionName").get()
+        versionCode = providers.gradleProperty("versionCode").get().toInt()
+        versionName = listOf("versionMajor", "versionCode", "versionPatch")
+            .joinToString(".") { providers.gradleProperty(it).get() }
         buildConfigField("int", "MIN_SDK_VERSION", minSdk.toString())
     }
     compileOptions {

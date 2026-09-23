@@ -246,7 +246,7 @@
     <string name="tunnel_create_success">Successfully created tunnel “%s”</string>
     <string name="tunnel_error_already_exists">Tunnel “%s” already exists</string>
     <string name="tunnel_error_invalid_name">Invalid name</string>
-    <string name="tunnel_list_placeholder">Add a tunnel using the button below</string>
+    <string name="tunnel_list_placeholder">Ключа пока нет. Нажми ＋ внизу и выбери файл .conf, который тебе прислали</string>
     <string name="tunnel_name">Tunnel Name</string>
     <string name="tunnel_on_error">Unable to turn tunnel on (wgTurnOn returned %d)</string>
     <string name="tunnel_dns_failure">Unable to resolve DNS hostname: “%s”</string>
@@ -258,7 +258,7 @@
     <string name="version_summary">%1$s backend %2$s</string>
     <string name="version_summary_checking">Checking %s backend version</string>
     <string name="version_summary_unknown">Unknown %s version</string>
-    <string name="version_title">ВыпейН v%s</string>
+    <string name="version_title">ВыпейН %s</string>
     <string name="vpn_not_authorized_error">VPN service not authorized by user</string>
     <string name="vpn_start_error">Unable to start Android VPN service</string>
     <string name="zip_export_error">Unable to export tunnels: %s</string>

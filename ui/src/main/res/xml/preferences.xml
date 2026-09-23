@@ -2,7 +2,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings">
     <org.amnezia.awg.preference.VersionPreference
-        android:icon="@drawable/ic_icon"
+        android:icon="@drawable/cat_none"
         android:key="version" />
     <CheckBoxPreference
         android:defaultValue="false"
@@ -11,13 +11,7 @@
         android:summaryOff="@string/restore_on_boot_summary_off"
         android:summaryOn="@string/restore_on_boot_summary_on"
         android:title="@string/restore_on_boot_title" />
-    <org.amnezia.awg.preference.ZipExporterPreference android:key="zip_exporter" />
     <org.amnezia.awg.preference.QuickTilePreference android:key="quick_tile" />
-    <Preference
-        android:key="log_viewer"
-        android:singleLineTitle="false"
-        android:summary="@string/log_viewer_pref_summary"
-        android:title="@string/log_viewer_pref_title" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="dark_theme"
@@ -34,11 +28,4 @@
         android:title="@string/multiple_tunnels_title" />
     <org.amnezia.awg.preference.ToolsInstallerPreference android:key="tools_installer" />
     <org.amnezia.awg.preference.KernelModuleEnablerPreference android:key="kernel_module_enabler" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="allow_remote_control_intents"
-        android:singleLineTitle="false"
-        android:summaryOff="@string/allow_remote_control_intents_summary_off"
-        android:summaryOn="@string/allow_remote_control_intents_summary_on"
-        android:title="@string/allow_remote_control_intents_title" />
 </androidx.preference.PreferenceScreen>

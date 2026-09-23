@@ -246,7 +246,7 @@
     <string name="tunnel_create_success">Успешно создан туннель “%s”</string>
     <string name="tunnel_error_already_exists">Туннель “%s” уже существует</string>
     <string name="tunnel_error_invalid_name">Неправильное имя</string>
-    <string name="tunnel_list_placeholder">Добавьте туннель с помощью кнопки ниже</string>
+    <string name="tunnel_list_placeholder">Ключа пока нет. Нажми ＋ внизу и выбери файл .conf, который тебе прислали</string>
     <string name="tunnel_name">Название туннеля</string>
     <string name="tunnel_on_error">Не удалось включить туннель (wgTurnOn вернул %d)</string>
     <string name="tunnel_dns_failure">Не удалось определить DNS имя: “%s”</string>
@@ -258,7 +258,7 @@
     <string name="version_summary">Бэкенд: %1$s %2$s</string>
     <string name="version_summary_checking">Проверка версии бэкэнда %s</string>
     <string name="version_summary_unknown">Неизвестная версия %s</string>
-    <string name="version_title">ВыпейН v%s</string>
+    <string name="version_title">ВыпейН %s</string>
     <string name="vpn_not_authorized_error">Сервис VPN не авторизован пользователем</string>
     <string name="vpn_start_error">Не удалось запустить службу Android VPN</string>
     <string name="zip_export_error">Не удалось экспортировать туннели: %s</string>
