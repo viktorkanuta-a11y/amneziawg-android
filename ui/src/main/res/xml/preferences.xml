@@ -2,8 +2,13 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="settings">
     <org.amnezia.awg.preference.VersionPreference
-        android:icon="@drawable/cat_none"
+        android:icon="@drawable/cat_none_center"
         android:key="version" />
+    <Preference
+        android:key="pamyatka"
+        android:singleLineTitle="false"
+        android:summary="@string/pamyatka_summary"
+        android:title="@string/pamyatka_title" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="restore_on_boot"

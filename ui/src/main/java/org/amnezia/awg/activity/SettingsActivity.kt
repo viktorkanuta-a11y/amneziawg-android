@@ -8,11 +8,13 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.amnezia.awg.Application
 import org.amnezia.awg.QuickTileService
 import org.amnezia.awg.R
@@ -51,7 +53,18 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, key: String?) {
             preferenceManager.preferenceDataStore = PreferencesPreferenceDataStore(lifecycleScope, Application.getPreferencesDataStore())
             addPreferencesFromResource(R.xml.preferences)
-            preferenceScreen.initialExpandedChildrenCount = 5
+            preferenceScreen.initialExpandedChildrenCount = 6
+            preferenceManager.findPreference<Preference>("pamyatka")?.setOnPreferenceClickListener {
+                val image = ImageView(requireContext()).apply {
+                    setImageResource(R.drawable.pamyatka)
+                    adjustViewBounds = true
+                }
+                MaterialAlertDialogBuilder(requireContext())
+                    .setView(image)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+                true
+            }
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || QuickTileService.isAdded) {
                 val quickTile = preferenceManager.findPreference<Preference>("quick_tile")

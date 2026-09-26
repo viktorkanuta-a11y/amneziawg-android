@@ -49,6 +49,15 @@ import static org.amnezia.awg.GoBackend.*;
  */
 @NonNullForAll
 public final class GoBackend implements Backend {
+    // ВыпейН v16: встроенный список приложений, которые идут через туннель.
+    // net.vipein обязателен — через него проверка обновлений. Chrome в списке нет намеренно.
+    private static final String[] DEFAULT_INCLUDED_APPLICATIONS = {
+            "net.vipein", "com.google.android.youtube", "org.telegram.messenger", "com.whatsapp",
+            "com.instagram.android", "com.facebook.katana", "com.twitter.android", "com.discord",
+            "org.thoughtcrime.securesms", "com.viber.voip", "com.snapchat.android", "com.roblox.client",
+            "com.linkedin.android", "com.zhiliaoapp.musically", "com.openai.chatgpt", "com.anthropic.claude",
+            "com.github.android", "org.mozilla.firefox"
+    };
     private static final int DNS_RESOLUTION_RETRIES = 10;
     private static final String TAG = "AmneziaWG/GoBackend";
     @Nullable private static AlwaysOnCallback alwaysOnCallback;
@@ -387,6 +396,19 @@ public final class GoBackend implements Backend {
 
             for (final String includedApplication : config.getInterface().getIncludedApplications())
                 builder.addAllowedApplication(includedApplication);
+
+            // ВыпейН v16: в ключе нет ни IncludedApplications, ни ExcludedApplications —
+            // через туннель идут только приложения из встроенного списка.
+            if (config.getInterface().getIncludedApplications().isEmpty()
+                    && config.getInterface().getExcludedApplications().isEmpty()) {
+                for (final String app : DEFAULT_INCLUDED_APPLICATIONS) {
+                    try {
+                        builder.addAllowedApplication(app);
+                    } catch (final Exception e) {
+                        Log.w(TAG, "Skip app " + app + ": " + e.getMessage());
+                    }
+                }
+            }
 
             for (final InetNetwork addr : config.getInterface().getAddresses())
                 builder.addAddress(addr.getAddress(), addr.getMask());

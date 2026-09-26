@@ -59,7 +59,7 @@
                 android:adjustViewBounds="true"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/cat_none" />
+                android:src="@drawable/cat_none_center" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,6 +67,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/tunnel_list_placeholder_margin"
                 android:layout_marginEnd="@dimen/tunnel_list_placeholder_margin"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
                 android:text="@string/tunnel_list_placeholder"
                 android:textSize="20sp" />
         </LinearLayout>

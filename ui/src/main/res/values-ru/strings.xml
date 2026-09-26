@@ -272,4 +272,6 @@
     <string name="import_disclaimer">Убедитесь, что вы получили файл конфигурации в надёжном источнике.</string>
     <string name="tunnel_status_connected">Подключено</string>
     <string name="tunnel_status_connecting">Подключение…</string>
+    <string name="pamyatka_title">Памятка</string>
+    <string name="pamyatka_summary">Правила ВыпейН — прочитай один раз</string>
 </resources>
